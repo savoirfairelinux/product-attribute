@@ -289,3 +289,7 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+#. module: base_custom_attributes
+#: field:product.category,attribute_set_id:0
+msgid "Default Attribute Set"
+msgstr ""

@@ -68,6 +68,11 @@ msgid "Type"
 msgstr "Type"
 
 #. module: base_custom_attributes
+#: field:product.category,attribute_set_id:0
+msgid "Default Attribute Set"
+msgstr "Jeux d’attribut par défaut"
+
+#. module: base_custom_attributes
 #: field:attribute.set,attribute_group_ids:0
 #: model:ir.actions.act_window,name:base_custom_attributes.attribute_group_form_action
 #: model:ir.model.fields,field_description:base_custom_attributes.field_attribute_set_attribute_group_ids
