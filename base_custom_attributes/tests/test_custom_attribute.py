@@ -35,9 +35,13 @@ class TestCustomAttribute(TransactionCase):
         self.model_model = self.env['ir.model']
         self.field_model = self.env['ir.model.fields']
 
-        self.model = self.env['ir.model'].create({
-            'name': 'test_model_1',
-        })
+        self.model = self.env['ir.model'].search(
+            [('name', '=', 'test_model_1')])
+        if not self.model:
+            self.model = self.env['ir.model'].create({
+                'name': 'test_model_1',
+                'model': 'x_test_model_1',
+            })
 
         self.set_1 = self.set_model.create({
             'name': 'Set 1',
@@ -62,12 +66,12 @@ class TestCustomAttribute(TransactionCase):
             'model_id': self.model.id,
         }
 
-    def test_create_attribute_char(self):
+    def test_00_create_attribute_char(self):
         self.vals.update({'attribute_type': 'char'})
         attribute = self.attribute_model.create(self.vals)
         self.assertEqual(attribute.ttype, 'char')
 
-    def test_create_attribute_selection(self):
+    def test_01_create_attribute_selection(self):
         self.vals.update({
             'attribute_type': 'select',
             'option_ids': [
@@ -83,7 +87,7 @@ class TestCustomAttribute(TransactionCase):
         self.assertEqual(attribute.ttype, 'many2one')
         self.assertEqual(attribute.relation, 'attribute.option')
 
-    def test_create_attribute_multiselect(self):
+    def test_02_create_attribute_multiselect(self):
         self.vals.update({
             'attribute_type': 'multiselect',
             'option_ids': [
@@ -99,7 +103,7 @@ class TestCustomAttribute(TransactionCase):
         self.assertEqual(attribute.ttype, 'many2many')
         self.assertEqual(attribute.relation, 'attribute.option')
 
-    def test_wizard(self):
+    def test_03_wizard(self):
         sequence_type_model = self.env['ir.sequence.type']
         sequence_type = sequence_type_model.create({
             'name': 'Sequence type 1',
