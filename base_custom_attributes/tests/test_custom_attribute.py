@@ -36,12 +36,7 @@ class TestCustomAttribute(TransactionCase):
         self.field_model = self.env['ir.model.fields']
 
         self.model = self.env['ir.model'].search(
-            [('name', '=', 'test_model_1')])
-        if not self.model:
-            self.model = self.env['ir.model'].create({
-                'name': 'test_model_1',
-                'model': 'x_test_model_1',
-            })
+            [('model', '=', 'res.partner')], limit=1)
 
         self.set_1 = self.set_model.create({
             'name': 'Set 1',
@@ -107,7 +102,7 @@ class TestCustomAttribute(TransactionCase):
         sequence_type_model = self.env['ir.sequence.type']
         sequence_type = sequence_type_model.create({
             'name': 'Sequence type 1',
-            'code': 'test',
+            'code': 'test_sequence_type',
         })
 
         model = self.model_model.search([('name', '=', 'ir.sequence.type')])[0]
